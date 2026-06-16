@@ -1,3 +1,8 @@
+const supabase = window.supabase.createClient(
+  'https://uumxusprugyifvyipdeq.supabase.co',
+  'sb_publishable_XvH0YeSMtyvCjBi_OxxZsQ_i4lsQeJE'
+);
+
 const people = [
   {name:'Daisy', teams:['Uruguay','Ecuador','England','Haiti','France']},
   {name:'Frankie', teams:['Jordan','Cabo Verde','Ghana','Bosnia and Herzegovina','USA','Argentina']},
@@ -9,7 +14,9 @@ const people = [
   {name:'Lulu', teams:['Senegal','Australia','Canada','Sweden','Qatar']},
   {name:'Darcy', teams:["Cote d'Ivoire",'Egypt','Croatia','Panama','Spain','Saudi Arabia']}
 ];
+
 const codes = {'Uruguay':'UY','Ecuador':'EC','England':'GB-ENG','Haiti':'HT','France':'FR','Jordan':'JO','Cabo Verde':'CV','Ghana':'GH','Bosnia and Herzegovina':'BA','USA':'US','Argentina':'AR','Switzerland':'CH','Norway':'NO','Colombia':'CO','IR Iran':'IR','Congo DR':'CD','Iraq':'IQ','South Africa':'ZA','Mexico':'MX','Portugal':'PT','Paraguay':'PY','Japan':'JP','Scotland':'GB-SCT','Turkiye':'TR','Uzbekistan':'UZ','Curacao':'CW','Morocco':'MA','Netherlands':'NL','Belgium':'BE','Brazil':'BR','South Korea':'KR','Austria':'AT','Germany':'DE','Tunisia':'TN','Czechia':'CZ','Algeria':'DZ','New Zealand':'NZ','Senegal':'SN','Australia':'AU','Canada':'CA','Sweden':'SE','Qatar':'QA',"Cote d'Ivoire":'CI','Egypt':'EG','Croatia':'HR','Panama':'PA','Spain':'ES','Saudi Arabia':'SA'};
+
 let fixtures = [
  {date:'2026-06-12T05:00:00+10:00', stage:'Group A', group:'A', home:'Mexico', away:'South Africa', venue:'Mexico City'},
  {date:'2026-06-12T12:00:00+10:00', stage:'Group A', group:'A', home:'South Korea', away:'Czechia', venue:'Guadalajara'},
@@ -70,57 +77,44 @@ let fixtures = [
  {date:'2026-06-26T09:00:00+10:00', stage:'Group F', group:'F', home:'Japan', away:'Sweden', venue:'Dallas'},
  {date:'2026-06-26T09:00:00+10:00', stage:'Group F', group:'F', home:'Tunisia', away:'Netherlands', venue:'Kansas City'},
  {date:'2026-06-26T12:00:00+10:00', stage:'Group D', group:'D', home:'Turkiye', away:'USA', venue:'Los Angeles'},
- {date:'2026-06-26T12:00:00+10:00', stage:'Group D', group:'D', home:'Paraguay', away:'Australia', venue:'San Francisco'},
- {date:'2026-06-27T05:00:00+10:00', stage:'Group I', group:'I', home:'Norway', away:'France', venue:'Boston'},
- {date:'2026-06-27T05:00:00+10:00', stage:'Group I', group:'I', home:'Senegal', away:'Iraq', venue:'Toronto'},
- {date:'2026-06-27T10:00:00+10:00', stage:'Group H', group:'H', home:'Cabo Verde', away:'Saudi Arabia', venue:'Houston'},
- {date:'2026-06-27T10:00:00+10:00', stage:'Group H', group:'H', home:'Uruguay', away:'Spain', venue:'Guadalajara'},
- {date:'2026-06-27T13:00:00+10:00', stage:'Group G', group:'G', home:'Egypt', away:'IR Iran', venue:'Seattle'},
- {date:'2026-06-27T13:00:00+10:00', stage:'Group G', group:'G', home:'New Zealand', away:'Belgium', venue:'Vancouver'},
- {date:'2026-06-28T07:00:00+10:00', stage:'Group L', group:'L', home:'Panama', away:'England', venue:'New York/NJ'},
- {date:'2026-06-28T07:00:00+10:00', stage:'Group L', group:'L', home:'Croatia', away:'Ghana', venue:'Philadelphia'},
- {date:'2026-06-28T09:30:00+10:00', stage:'Group K', group:'K', home:'Colombia', away:'Portugal', venue:'Miami'},
- {date:'2026-06-28T09:30:00+10:00', stage:'Group K', group:'K', home:'Congo DR', away:'Uzbekistan', venue:'Atlanta'},
- {date:'2026-06-28T12:00:00+10:00', stage:'Group J', group:'J', home:'Algeria', away:'Austria', venue:'Kansas City'},
- {date:'2026-06-28T12:00:00+10:00', stage:'Group J', group:'J', home:'Jordan', away:'Argentina', venue:'Dallas'},
- {date:'2026-06-29T05:00:00+10:00', stage:'Round of 32', group:'', home:'Runner-up A', away:'Runner-up B', venue:'Los Angeles', code:'M73'},
- {date:'2026-06-30T03:00:00+10:00', stage:'Round of 32', group:'', home:'Winner C', away:'Runner-up F', venue:'Houston', code:'M76'},
- {date:'2026-06-30T06:30:00+10:00', stage:'Round of 32', group:'', home:'Winner E', away:'3rd A/B/C/D/F', venue:'Boston', code:'M74'},
- {date:'2026-06-30T11:00:00+10:00', stage:'Round of 32', group:'', home:'Winner F', away:'Runner-up C', venue:'Monterrey', code:'M75'},
- {date:'2026-07-01T03:00:00+10:00', stage:'Round of 32', group:'', home:'Runner-up E', away:'Runner-up I', venue:'Dallas', code:'M78'},
- {date:'2026-07-01T07:00:00+10:00', stage:'Round of 32', group:'', home:'Winner I', away:'3rd C/D/F/G/H', venue:'New York/NJ', code:'M77'},
- {date:'2026-07-01T11:00:00+10:00', stage:'Round of 32', group:'', home:'Winner A', away:'3rd C/E/F/H/I', venue:'Mexico City', code:'M79'},
- {date:'2026-07-02T02:00:00+10:00', stage:'Round of 32', group:'', home:'Winner L', away:'3rd E/H/I/J/K', venue:'Atlanta', code:'M80'},
- {date:'2026-07-02T06:00:00+10:00', stage:'Round of 32', group:'', home:'Winner G', away:'3rd A/E/H/I/J', venue:'Seattle', code:'M82'},
- {date:'2026-07-02T10:00:00+10:00', stage:'Round of 32', group:'', home:'Winner D', away:'3rd B/E/F/I/J', venue:'San Francisco', code:'M81'},
- {date:'2026-07-03T05:00:00+10:00', stage:'Round of 32', group:'', home:'Winner H', away:'Runner-up J', venue:'Los Angeles', code:'M84'},
- {date:'2026-07-03T09:00:00+10:00', stage:'Round of 32', group:'', home:'Runner-up K', away:'Runner-up L', venue:'Toronto', code:'M83'},
- {date:'2026-07-03T13:00:00+10:00', stage:'Round of 32', group:'', home:'Winner B', away:'3rd E/F/G/I/J', venue:'Vancouver', code:'M85'},
- {date:'2026-07-04T04:00:00+10:00', stage:'Round of 32', group:'', home:'Runner-up D', away:'Runner-up G', venue:'Dallas', code:'M88'},
- {date:'2026-07-04T08:00:00+10:00', stage:'Round of 32', group:'', home:'Winner J', away:'Runner-up H', venue:'Miami', code:'M86'},
- {date:'2026-07-04T11:30:00+10:00', stage:'Round of 32', group:'', home:'Winner K', away:'3rd D/E/I/J/L', venue:'Kansas City', code:'M87'},
- {date:'2026-07-05T03:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M73', away:'Winner M75', venue:'Houston', code:'M90'},
- {date:'2026-07-05T07:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M74', away:'Winner M77', venue:'Philadelphia', code:'M89'},
- {date:'2026-07-06T06:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M76', away:'Winner M78', venue:'New York/NJ', code:'M91'},
- {date:'2026-07-06T10:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M79', away:'Winner M80', venue:'Mexico City', code:'M92'},
- {date:'2026-07-07T05:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M83', away:'Winner M84', venue:'Dallas', code:'M93'},
- {date:'2026-07-07T10:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M81', away:'Winner M82', venue:'Seattle', code:'M94'},
- {date:'2026-07-08T02:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M86', away:'Winner M88', venue:'Atlanta', code:'M95'},
- {date:'2026-07-08T06:00:00+10:00', stage:'Round of 16', group:'', home:'Winner M85', away:'Winner M87', venue:'Vancouver', code:'M96'},
- {date:'2026-07-10T06:00:00+10:00', stage:'Quarter-final', group:'', home:'Winner M89', away:'Winner M90', venue:'Boston', code:'M97'},
- {date:'2026-07-11T05:00:00+10:00', stage:'Quarter-final', group:'', home:'Winner M93', away:'Winner M94', venue:'Los Angeles', code:'M98'},
- {date:'2026-07-12T07:00:00+10:00', stage:'Quarter-final', group:'', home:'Winner M91', away:'Winner M92', venue:'Miami', code:'M99'},
- {date:'2026-07-12T11:00:00+10:00', stage:'Quarter-final', group:'', home:'Winner M95', away:'Winner M96', venue:'Kansas City', code:'M100'},
- {date:'2026-07-15T05:00:00+10:00', stage:'Semi-final', group:'', home:'Winner M97', away:'Winner M98', venue:'Dallas', code:'M101'},
- {date:'2026-07-16T05:00:00+10:00', stage:'Semi-final', group:'', home:'Winner M99', away:'Winner M100', venue:'Atlanta', code:'M102'},
- {date:'2026-07-19T07:00:00+10:00', stage:'Third-place play-off', group:'', home:'Loser M101', away:'Loser M102', venue:'Miami', code:'M103'},
- {date:'2026-07-20T05:00:00+10:00', stage:'Final', group:'', home:'Winner M101', away:'Winner M102', venue:'New York/NJ', code:'M104'}
+ {date:'2026-06-26T12:00:00+10:00', stage:'Group D', group:'D', home:'Paraguay', away:'Australia', venue:'San Francisco'}
 ];
-fixtures = JSON.parse(localStorage.getItem('fixtures')||'null') || fixtures;
-const results = JSON.parse(localStorage.getItem('results')||'{}');
+
+let results = {};
+
+async function loadResults() {
+  const { data, error } = await supabase.from('scores').select('*');
+  if (error) {
+    console.error('Could not load scores:', error);
+    return;
+  }
+
+  results = {};
+  data.forEach(row => {
+    results[row.match_id] = {
+      h: row.home_score,
+      a: row.away_score
+    };
+  });
+}
+
+async function saveResultToSupabase(matchId, homeScore, awayScore) {
+  const { error } = await supabase.from('scores').upsert({
+    match_id: String(matchId),
+    home_score: Number(homeScore),
+    away_score: Number(awayScore),
+    updated_at: new Date().toISOString()
+  });
+
+  if (error) {
+    console.error('Could not save score:', error);
+    alert('Score could not be saved. Check Supabase settings.');
+  }
+}
+
 function flag(team){ const c=codes[team]; if(!c)return '🏳️'; if(c.includes('-')) return c==='GB-ENG'?'🏴':c==='GB-SCT'?'🏴':'🏳️'; return c.replace(/./g,ch=>String.fromCodePoint(127397+ch.charCodeAt())); }
 function owners(team){return people.filter(p=>p.teams.includes(team)).map(p=>p.name)}
-function calcTeamPoints(){ const pts={}; Object.keys(codes).forEach(t=>pts[t]=0); fixtures.forEach((m,i)=>{const r=results[i]; if(!r||r.h===''||r.a==='')return; const h=+r.h,a=+r.a; if(h>a) pts[m.home]+=3; else if(a>h) pts[m.away]+=3; else {pts[m.home]+=1; pts[m.away]+=1;}}); return pts;}
+function calcTeamPoints(){ const pts={}; Object.keys(codes).forEach(t=>pts[t]=0); fixtures.forEach((m,i)=>{const r=results[i]; if(!r||r.h===''||r.a===''||r.h===null||r.a===null)return; const h=+r.h,a=+r.a; if(h>a) pts[m.home]=(pts[m.home]||0)+3; else if(a>h) pts[m.away]=(pts[m.away]||0)+3; else {pts[m.home]=(pts[m.home]||0)+1; pts[m.away]=(pts[m.away]||0)+1;}}); return pts;}
 function personStats(){ const pts=calcTeamPoints(); return people.map(p=>({ ...p, points:p.teams.reduce((s,t)=>s+(pts[t]||0),0), played:p.teams.reduce((s,t)=>s+fixtures.filter((m,i)=>(m.home===t||m.away===t)&&results[i]).length,0)})).sort((a,b)=>b.points-a.points||a.name.localeCompare(b.name));}
 function avatar(name){ const img=localStorage.getItem('photo_'+name); return `<div class="avatar">${img?`<img src="${img}">`:name[0]}</div>`; }
 function teamPill(t){return `<span class="pill">${flag(t)} ${t}</span>`}
@@ -130,12 +124,28 @@ function renderTeams(q=''){ const rows=[]; people.forEach(p=>p.teams.forEach(t=>
 function fmt(d){return new Intl.DateTimeFormat('en-AU',{timeZone:'Australia/Sydney',weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit',hour12:true,timeZoneName:'short'}).format(new Date(d))}
 function renderSchedule(){ const now=new Date(); const upcoming=fixtures.find(m=>new Date(m.date)>now)||fixtures[0]; document.getElementById('nextMatch').textContent = `${flag(upcoming.home)} ${upcoming.home} v ${flag(upcoming.away)} ${upcoming.away} — ${fmt(upcoming.date)}`; document.getElementById('scheduleList').innerHTML=fixtures.map((m,i)=>{const r=results[i]; return `<div class="match"><div class="muted">${fmt(m.date)}</div><div><div class="match-teams">${flag(m.home)} ${m.home} v ${flag(m.away)} ${m.away} ${r?`<span class="owner">${r.h}-${r.a}</span>`:''}</div><div class="muted">${m.code ? m.code + ' · ' : ''}${m.stage || ('Group ' + m.group)} · ${m.venue}</div></div><div class="muted">${[...new Set([...owners(m.home),...owners(m.away)])].join(', ')}</div></div>`}).join('')}
 function renderScores(){document.getElementById('scoreForms').innerHTML=fixtures.map((m,i)=>{const r=results[i]||{h:'',a:''}; return `<div class="score-card"><div><b>${flag(m.home)} ${m.home} v ${flag(m.away)} ${m.away}</b><br><span class="muted">${fmt(m.date)}</span></div><input type="number" min="0" value="${r.h}" data-i="${i}" data-side="h"><input type="number" min="0" value="${r.a}" data-i="${i}" data-side="a"><button onclick="saveScore(${i})">Save</button></div>`}).join('')}
-function saveScore(i){ const inputs=[...document.querySelectorAll(`[data-i="${i}"]`)]; results[i]={h:inputs.find(x=>x.dataset.side==='h').value,a:inputs.find(x=>x.dataset.side==='a').value}; localStorage.setItem('results',JSON.stringify(results)); renderAll(); }
+
+async function saveScore(i){
+  const inputs=[...document.querySelectorAll(`[data-i="${i}"]`)];
+  const homeScore=inputs.find(x=>x.dataset.side==='h').value;
+  const awayScore=inputs.find(x=>x.dataset.side==='a').value;
+
+  results[i]={h:homeScore,a:awayScore};
+
+  await saveResultToSupabase(i, homeScore, awayScore);
+  renderAll();
+}
+
 function savePhoto(e,name){ const f=e.target.files[0]; if(!f)return; const reader=new FileReader(); reader.onload=()=>{localStorage.setItem('photo_'+name,reader.result); renderAll()}; reader.readAsDataURL(f); }
 function renderAll(){renderLeaderboard(); renderIndividuals(); renderTeams(document.getElementById('teamSearch')?.value||''); renderSchedule(); renderScores();}
+
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.view').forEach(x=>x.classList.remove('active')); b.classList.add('active'); document.getElementById(b.dataset.view).classList.add('active')});
 document.getElementById('teamSearch').oninput=e=>renderTeams(e.target.value);
-document.getElementById('resetScores').onclick=()=>{localStorage.removeItem('results'); location.reload()};
+document.getElementById('resetScores').onclick=async()=>{results={}; await supabase.from('scores').delete().neq('match_id',''); renderAll();};
 document.getElementById('downloadSchedule').onclick=()=>{const csv='date_aest,stage,code,home,away,venue\n'+fixtures.map(m=>`"${fmt(m.date)}","${m.stage || ('Group '+m.group)}","${m.code||''}","${m.home}","${m.away}","${m.venue}"`).join('\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='world-cup-2026-aest-schedule.csv'; a.click();};
 document.getElementById('fixtureImport').onchange=e=>{const f=e.target.files[0]; if(!f)return; const reader=new FileReader(); reader.onload=()=>{fixtures=JSON.parse(reader.result); localStorage.setItem('fixtures',JSON.stringify(fixtures)); renderAll()}; reader.readAsText(f);};
-renderAll();
+
+(async function init(){
+  await loadResults();
+  renderAll();
+})();
