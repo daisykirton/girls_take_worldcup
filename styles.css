@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup 2026 Sweep</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">FIFA World Cup 2026 Sweep</p>
+      <h1>Live leaderboard, AEST fixtures & team assignments</h1>
+      <p class="sub">Switch between individual and team views, track points, and upload player photos locally.</p>
+    </div>
+    <div class="hero-card">
+      <div class="big">🏆</div>
+      <span id="nextMatch">Next match loading…</span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-view="leaderboard">Leaderboard</button>
+    <button class="tab" data-view="individuals">Individual view</button>
+    <button class="tab" data-view="teams">Team view</button>
+    <button class="tab" data-view="schedule">Match schedule</button>
+    <button class="tab" data-view="admin">Update scores</button>
+  </nav>
+
+  <main>
+    <section id="leaderboard" class="view active">
+      <div class="section-head">
+        <h2>Live leaderboard</h2>
+        <p>Points update from saved match results. Scoring: win = 3, draw = 1.</p>
+      </div>
+      <div id="leaderboardCards" class="cards"></div>
+    </section>
+
+    <section id="individuals" class="view">
+      <div class="section-head"><h2>Individual view</h2><p>Each person and their assigned countries.</p></div>
+      <div id="individualCards" class="cards"></div>
+    </section>
+
+    <section id="teams" class="view">
+      <div class="section-head"><h2>Team view</h2><p>Find a country and who owns it.</p></div>
+      <input id="teamSearch" class="search" placeholder="Search country or person…" />
+      <div id="teamGrid" class="team-grid"></div>
+    </section>
+
+    <section id="schedule" class="view">
+      <div class="section-head"><h2>Match schedule in AEST</h2><p>Group-stage fixtures loaded in Australian Eastern Standard Time.</p></div>
+      <div class="actions">
+        <button id="downloadSchedule">Download schedule CSV</button>
+        <label class="import-label">Import fixture JSON <input type="file" id="fixtureImport" accept="application/json" /></label>
+      </div>
+      <div id="scheduleList" class="schedule-list"></div>
+    </section>
+
+    <section id="admin" class="view">
+      <div class="section-head"><h2>Update scores</h2><p>Enter scores after each match to update the leaderboard on this device.</p></div>
+      <div id="scoreForms" class="schedule-list"></div>
+      <button id="resetScores" class="danger">Reset saved scores</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Tip: upload each person’s photo from their card. Photos and scores are saved locally in the browser.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
